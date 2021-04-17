@@ -6,7 +6,7 @@ import (
 	"fmt"
 	// "runtime"
 	// "math/cmplx"
-	"time"
+	// "time"
 	// "math/rand"
 	// "math"
 )
@@ -63,18 +63,34 @@ import (
 // }
 
 func main() {
-	fmt.Println("When's Saturday?")
-	today := time.Now().Weekday()
-	switch time.Saturday {
-	case today + 0:
-		fmt.Println("Today.")
-	case today + 1:
-		fmt.Println("Tomorrow.")
-	case today + 2:
-		fmt.Println("In two days.")
-	default:
-		fmt.Println("Too far away.")
+	fmt.Println("counting")
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
 	}
+	fmt.Println("done")
+	// defer fmt.Println("world")
+	// fmt.Println("hello")
+	// today := time.Now()
+	// switch {
+	// case today.Hour() < 12:
+	// 	fmt.Println("Good morning!")
+	// case today.Hour() < 17:
+	// 	fmt.Println("Good afternoon.")
+	// default:
+	// 	fmt.Println("Good evening")
+	// }
+	// fmt.Println("When's Saturday?")
+	// today := time.Now().Weekday()
+	// switch time.Saturday {
+	// case today + 0:
+	// 	fmt.Println("Today.")
+	// case today + 1:
+	// 	fmt.Println("Tomorrow.")
+	// case today + 2:
+	// 	fmt.Println("In two days.")
+	// default:
+	// 	fmt.Println("Too far away.")
+	// }
 	// fmt.Print("Go runs on ")
 	// switch os := runtime.GOOS; os {
 	// case "darwin":
