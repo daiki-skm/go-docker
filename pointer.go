@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func pointers(i, j int) {
 	p := &i
@@ -150,6 +153,102 @@ func createSlice() {
 	printSliceEx("d", d)
 }
 
+func ticTac() {
+	board := [][]string{
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
+		[]string{"_", "_", "_"},
+	}
+
+	board[0][0] = "X"
+	board[2][2] = "X"
+	board[1][2] = "X"
+	board[1][0] = "X"
+	board[0][2] = "X"
+
+	for i := 0; i < len(board); i++ {
+		fmt.Printf("%s\n", strings.Join(board[i], " "))
+	}
+}
+
+func sliceappend() {
+	var s []int
+	printSlice(s)
+
+	s = append(s, 0)
+	printSlice(s)
+
+	s = append(s, 1)
+	printSlice(s)
+
+	s = append(s, 3)
+	printSlice(s)
+
+	s = append(s, 34)
+	printSlice(s)
+
+	s = append(s, 2, 3, 4)
+	printSlice(s)
+}
+
+func slicerange() {
+	pow := []int{1, 2, 4, 8, 16, 32, 64, 128}
+	for i, v := range pow {
+		fmt.Printf("2**%d = %d\n", i ,v)
+	}
+}
+
+func rangeCon() {
+	pow := make([]int, 10)
+	for i := range pow {
+		pow[i] = 1 << uint(i)
+	}
+	for _, val := range pow {
+		fmt.Printf("%d\n", val)
+	}
+}
+
+type VertexEx struct {
+	Lat, Long float64
+}
+
+func maps() {
+	var m map[string]VertexEx
+	m = make(map[string]VertexEx)
+	m["daiki sakuma"] = VertexEx{
+		40.68433, -74.39967,
+	}
+	fmt.Println(m["daiki sakuma"])
+}
+
+func mapsLiteral() {
+	m := map[string]VertexEx{
+		"Bell Labs": {
+			40.68433, -74.39967,
+		},
+		"Google": {
+			37.42202, -122.08408,
+		},
+	}
+	fmt.Println(m)
+}
+
+func mutateMaps() {
+	m := make(map[string]int)
+
+	m["Answer"] = 42
+	fmt.Println("The value:", m["Answer"])
+
+	m["Answer"] = 48
+	fmt.Println("The value:", m["Answer"])
+
+	delete(m, "Answer")
+	fmt.Println("The value:", m["Answer"])
+
+	v, ok := m["Answer"]
+	fmt.Println("The value:", v, "Present?", ok)
+}
+
 func main() {
 	// pointers(42, 2701)
 	// structs(1, 2)
@@ -162,5 +261,12 @@ func main() {
 	// sliceDefault()
 	// sliceLengCapa()
 	// nilslice()
-	createSlice()
+	// createSlice()
+	// ticTac()
+	// sliceappend()
+	// slicerange()
+	// rangeCon()
+	// maps()
+	// mapsLiteral()
+	mutateMaps()
 }
