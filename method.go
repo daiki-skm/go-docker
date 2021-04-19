@@ -98,11 +98,50 @@ func interfaces() {
 	v := Vertex{3,4}
 
 	// a = f
-	// a = &v
-	a = v
+	a = &v
+	// a = v
 
 	fmt.Println(a.Abs())
 }
+
+type I interface {
+	M()
+}
+
+type T struct {
+	S string
+}
+
+func (t *T) M() {
+	fmt.Println(t.S)
+}
+
+type F float64
+
+func (f F) M() {
+	fmt.Println(f)
+}
+
+func interfacesVal() {
+	var i I
+
+	i = &T{"Hello"}
+	describe(i)
+	i.M()
+
+	i = F(math.Pi)
+	describe(i)
+	i.M()
+}
+
+func describe(i I) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
+
+// func interfaces10() {
+// 	var i I = T{"hello"}
+// 	i.M()
+// }
 
 func main() {
 	// methods()
@@ -111,5 +150,7 @@ func main() {
 	// indirection()
 	// indirection2()
 	// choose()
-	interfaces()
+	// interfaces()
+	// interfaces10()
+	interfacesVal()
 }
