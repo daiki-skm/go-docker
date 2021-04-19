@@ -113,6 +113,10 @@ type T struct {
 }
 
 func (t *T) M() {
+	if t == nil {
+		fmt.Println("<nil>")
+		return
+	}
 	fmt.Println(t.S)
 }
 
@@ -143,6 +147,19 @@ func describe(i I) {
 // 	i.M()
 // }
 
+func withNil() {
+	var i I
+
+	var t *T
+	i = t
+	describe(i)
+	i.M()
+
+	i = &T{"&hello"}
+	describe(i)
+	i.M()
+}
+
 func main() {
 	// methods()
 	// methodsCon()
@@ -152,5 +169,6 @@ func main() {
 	// choose()
 	// interfaces()
 	// interfaces10()
-	interfacesVal()
+	// interfacesVal()
+	withNil()
 }
