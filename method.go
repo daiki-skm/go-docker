@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"time"
 )
 
 type Vertex struct {
@@ -191,6 +192,60 @@ func assertions() {
 	fmt.Println(f)
 }
 
+func do(i interface{}) {
+	switch v := i.(type) {
+	case int:
+		fmt.Printf("Twice %v is %v\n", v, v*2)
+	case string:
+		fmt.Printf("%q is %v bytes long\n", v, len(v))
+	default:
+		fmt.Printf("I don't know about type %T!\n", v)
+	}
+}
+
+func switches() {
+	do(21)
+	do("hello")
+	do(true)
+}
+
+type Person struct {
+	Name string
+	Age int
+}
+
+func (p Person) String() string {
+	return fmt.Sprintf("%v (%v years)", p.Name, p.Age)
+}
+
+func stringers() {
+	a := Person{"Arthur Dent", 42}
+	z := Person{"Zaphod Beeblebrox", 9001}
+	fmt.Println(a,z)
+}
+
+type MyError struct {
+	When time.Time
+	What string
+}
+
+func (e *MyError) Error() string {
+	return fmt.Sprintf("at %v, %s", e.When, e.What)
+}
+
+func run() error {
+	return &MyError {
+		time.Now(),
+		"it didn't work",
+	}
+}
+
+func errors() {
+	if err := run(); err != nil {
+		fmt.Println(err)
+	}
+}
+
 func main() {
 	// methods()
 	// methodsCon()
@@ -203,5 +258,8 @@ func main() {
 	// interfacesVal()
 	// withNil()
 	// empty()
-	assertions()
+	// assertions()
+	// switches()
+	// stringers()
+	errors()
 }
