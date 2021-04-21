@@ -36,7 +36,16 @@ func channels() {
 	fmt.Println(x,y,x+y)
 }
 
+func bufferChan() {
+	ch := make(chan int, 10)
+	ch <- 1
+	ch <- 2
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+}
+
 func main() {
 	// goroutines()
-	channels()
+	// channels()
+	bufferChan()
 }
