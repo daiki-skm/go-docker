@@ -44,8 +44,69 @@ func bufferChan() {
 	fmt.Println(<-ch)
 }
 
+func fibonacci(n int, c chan int) {
+	x, y := 0, 1
+	for i := 0; i < n; i++ {
+		c <- x
+		x, y = y, x+y
+	}
+	close(c)
+}
+
+func rangeClose() {
+	c := make(chan int, 10)
+	go fibonacci(cap(c), c)
+	for i := range c {
+		fmt.Println(i)
+	}
+}
+
+func fibonaccitwo(c, quit chan int) {
+	x, y := 0, 1
+	for {
+		select {
+		case c <- x:
+			x, y = y, x+y
+		case <- quit:
+			fmt.Println("quit")
+			return
+		}
+	}
+}
+
+func selectMeth() {
+	c := make(chan int)
+	quit := make(chan int)
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println(<-c)
+		}
+		quit <- 0
+	}()
+	fibonaccitwo(c, quit)
+}
+
+func defaultSelect() {
+	tick := time.Tick(100 * time.Millisecond)
+	boom := time.After(500 * time.Millisecond)
+	for {
+		select {
+		case <-tick:
+			fmt.Printf("tick.")
+		case <-boom:
+			fmt.Printf("BOOM!")
+		default:
+			fmt.Println("      .")
+			time.Sleep(50*time.Millisecond)
+		}
+	}
+}
+
 func main() {
 	// goroutines()
 	// channels()
-	bufferChan()
+	// bufferChan()
+	// rangeClose()
+	// selectMeth()
+	// defaultSelect()
 }
