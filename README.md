@@ -37,6 +37,6 @@ docker-compose down
 ### コンテナの環境に対してコマンドを叩く方法
 
 ```
-docker-compose exec goapp go run main.go
+docker-compose exec app go run main.go
 # docker-compose exec サービス名 コマンド
 ```
